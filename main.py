@@ -146,30 +146,27 @@ class Q1TemplateBot(ForecastBot):
         self, question: BinaryQuestion, research: str
     ) -> ReasonedPrediction[float]:
         prompt = clean_indents(
-            f"""
-            You are a professional forecaster interviewing for a job.
+                       f"""
+            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
             Your interview question is:
-            {title}
+            {question.question_text}
 
             Question background:
-            {background}
+            {question.background_info}
 
 
             This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
-            {resolution_criteria}
+            {question.resolution_criteria}
 
-            {fine_print}
+            {question.fine_print}
 
 
             Your research assistant says:
-            {summary_report}
+            {research}
 
-            Today is {today}.
-
-            Before answering consider the following role:
-            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
-
+            Today is {datetime.now().strftime("%Y-%m-%d")}.
+            
             Forecasting Approach:
 
                 Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
@@ -240,28 +237,25 @@ class Q1TemplateBot(ForecastBot):
     ) -> ReasonedPrediction[PredictedOptionList]:
         prompt = clean_indents(
             f"""            
-            You are a professional forecaster interviewing for a job.
+            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
             Your interview question is:
-            {title}
+            {question.question_text}
 
             Question background:
-            {background}
+            {question.background_info}
 
 
             This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
-            {resolution_criteria}
+            {question.resolution_criteria}
 
-            {fine_print}
+            {question.fine_print}
 
 
             Your research assistant says:
-            {summary_report}
+            {research}
 
-            Today is {today}.
-
-            Before answering consider the following role:
-            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
+            Today is {datetime.now().strftime("%Y-%m-%d")}.
 
             Forecasting Approach:
 
@@ -341,29 +335,26 @@ class Q1TemplateBot(ForecastBot):
             self._create_upper_and_lower_bound_messages(question)
         )
         prompt = clean_indents(
-            f"""
-            You are a professional forecaster interviewing for a job.
+            f"""            
+            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
             Your interview question is:
-            {title}
+            {question.question_text}
 
             Question background:
-            {background}
+            {question.background_info}
 
 
             This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
-            {resolution_criteria}
+            {question.resolution_criteria}
 
-            {fine_print}
+            {question.fine_print}
 
 
             Your research assistant says:
-            {summary_report}
+            {research}
 
-            Today is {today}.
-
-            Before answering consider the following role:
-            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
+            Today is {datetime.now().strftime("%Y-%m-%d")}.
 
             Forecasting Approach:
 
