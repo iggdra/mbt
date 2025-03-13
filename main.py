@@ -137,7 +137,7 @@ class Q1TemplateBot(ForecastBot):
         elif os.getenv("OPENROUTER_API_KEY"):
             model = GeneralLlm(model="openrouter/openai/gpt-4o", temperature=0.3)
         elif os.getenv("METACULUS_TOKEN"):
-            model = GeneralLlm(model="metaculus/gpt-4o", temperature=0.3)
+            model = GeneralLlm(model="metaculus/gpt-4o", temperature=0.8)
         else:
             raise ValueError("No API key for final_decision_llm found")
         return model
@@ -500,7 +500,7 @@ if __name__ == "__main__":
 
     template_bot = Q1TemplateBot(
         research_reports_per_question=1,
-        predictions_per_research_report=5,
+        predictions_per_research_report=3,
         use_research_summary_to_forecast=False,
         publish_reports_to_metaculus=True,
         folder_to_save_reports_to=None,
