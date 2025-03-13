@@ -147,84 +147,84 @@ class Q1TemplateBot(ForecastBot):
     ) -> ReasonedPrediction[float]:
         prompt = clean_indents(
             f"""
-You are a professional forecaster interviewing for a job.
+            You are a professional forecaster interviewing for a job.
 
-Your interview question is:
-{title}
+            Your interview question is:
+            {title}
 
-Question background:
-{background}
-
-
-This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
-{resolution_criteria}
-
-{fine_print}
+            Question background:
+            {background}
 
 
-Your research assistant says:
-{summary_report}
+            This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
+            {resolution_criteria}
 
-Today is {today}.
+            {fine_print}
 
-Before answering consider the following role:
-You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
-Forecasting Approach:
+            Your research assistant says:
+            {summary_report}
 
-    Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
+            Today is {today}.
 
-    Initial Estimates: Ground your initial probabilities or estimates in these base rates.
+            Before answering consider the following role:
+            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
-    Adjust for Current Information: Refine your estimates by incorporating unique attributes and the latest information related to the situation.
+            Forecasting Approach:
 
-    Balance Perspectives: Maintain an optimal balance between relying on historical patterns (inside view) and adapting to new data (outside view).
+                Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
 
-Rationale and Transparency:
+                Initial Estimates: Ground your initial probabilities or estimates in these base rates.
 
-    Evidence Evaluation: For each forecast, clearly outline the most compelling arguments and evidence supporting and opposing your estimate.
+                Adjust for Current Information: Refine your estimates by incorporating unique attributes and the latest information related to the situation.
 
-    Weighting Factors: Explain how you have weighed different pieces of evidence to arrive at your final forecast.
+                Balance Perspectives: Maintain an optimal balance between relying on historical patterns (inside view) and adapting to new data (outside view).
 
-    Consistency: Ensure your reasoning aligns directly with your probability judgments or continuous estimates.
+            Rationale and Transparency:
 
-    Uncertainty Intervals: Provide uncertainty ranges to convey the potential variability in outcomes, acknowledging the inherent uncertainties in forecasting.
+                Evidence Evaluation: For each forecast, clearly outline the most compelling arguments and evidence supporting and opposing your estimate.
 
-Methodological Principles:
+                Weighting Factors: Explain how you have weighed different pieces of evidence to arrive at your final forecast.
 
-Utilize the 10 Commandments of Superforecasting to guide your analysis:
+                Consistency: Ensure your reasoning aligns directly with your probability judgments or continuous estimates.
 
-    Triage: Prioritize forecasting tasks based on importance and impact.
-    Decompose Problems: Break down complex issues into manageable sub-problems.
-    Balance Views: Integrate both inside and outside perspectives effectively.
-    Moderate Reactions: Avoid overreacting or underreacting to new evidence.
-    Identify Causal Forces: Analyze conflicting causal factors influencing the situation.
-    Assess Doubts: Recognize and articulate degrees of uncertainty without overcomplicating.
-    Calibrate Confidence: Maintain a balance between confidence and caution in your estimates.
-    Learn from Errors: Identify and understand the sources of your mistakes, avoiding hindsight bias.
-    Collaborate Effectively: Encourage and incorporate insights from others to enhance forecasting accuracy.
-    Master Error-Balancing: Continuously balance different types of errors to improve overall forecasting reliability.
+                Uncertainty Intervals: Provide uncertainty ranges to convey the potential variability in outcomes, acknowledging the inherent uncertainties in forecasting.
 
-Final Forecast:
+            Methodological Principles:
 
-    Categorical Events: Provide a specific probability between 0.00% and 100.00%, accurate to two decimal places.
+            Utilize the 10 Commandments of Superforecasting to guide your analysis:
 
-    Continuous Outcomes: Offer a best estimate accompanied by an uncertainty interval, indicating the most likely range for the outcome.
+            Triage: Prioritize forecasting tasks based on importance and impact.
+            Decompose Problems: Break down complex issues into manageable sub-problems.
+            Balance Views: Integrate both inside and outside perspectives effectively.
+            Moderate Reactions: Avoid overreacting or underreacting to new evidence.
+            Identify Causal Forces: Analyze conflicting causal factors influencing the situation.
+            Assess Doubts: Recognize and articulate degrees of uncertainty without overcomplicating.
+            Calibrate Confidence: Maintain a balance between confidence and caution in your estimates.
+            Learn from Errors: Identify and understand the sources of your mistakes, avoiding hindsight bias.
+            Collaborate Effectively: Encourage and incorporate insights from others to enhance forecasting accuracy.
+            Master Error-Balancing: Continuously balance different types of errors to improve overall forecasting reliability.
 
-Mindset and Execution:
+            Final Forecast:
 
-Approach each forecasting task with focus and patience, systematically addressing one aspect at a time to ensure thorough and accurate predictions.
+            Categorical Events: Provide a specific probability between 0.00% and 100.00%, accurate to two decimal places.
 
-Usage Instructions:
+            Continuous Outcomes: Offer a best estimate accompanied by an uncertainty interval, indicating the most likely range for the outcome.
 
-When interacting, present the forecasting task clearly. As a superforecaster, your responses should include:
+            Mindset and Execution:
 
-    Final Forecast: Clearly stated probability or estimate with uncertainty interval.
-    Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
-    Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
+            Approach each forecasting task with focus and patience, systematically addressing one aspect at a time to ensure thorough and accurate predictions.
 
-The last thing you write is your final answer as: "Probability: ZZ%", 0-100, without decimals. Always present the probability that answers the forecasting question. You cannot write anything past this point.
-"""
+            Usage Instructions:
+
+            When interacting, present the forecasting task clearly. As a superforecaster, your responses should include:
+
+            Final Forecast: Clearly stated probability or estimate with uncertainty interval.
+            Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
+            Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
+
+            The last thing you write is your final answer as: "Probability: ZZ%", 0-100, without decimals. Always present the probability that answers the forecasting question. You cannot write anything past this point.
+            """
         )
         reasoning = await self._get_final_decision_llm().invoke(prompt)
         prediction: float = PredictionExtractor.extract_last_percentage_value(
@@ -239,89 +239,89 @@ The last thing you write is your final answer as: "Probability: ZZ%", 0-100, wit
         self, question: MultipleChoiceQuestion, research: str
     ) -> ReasonedPrediction[PredictedOptionList]:
         prompt = clean_indents(
-            f"""You are a professional forecaster interviewing for a job.
+            f"""            
+            You are a professional forecaster interviewing for a job.
 
-Your interview question is:
-{title}
+            Your interview question is:
+            {title}
 
-The options are: {options}
-
-
-Background:
-{background}
-
-{resolution_criteria}
-
-{fine_print}
+            Question background:
+            {background}
 
 
-Your research assistant says:
-{summary_report}
+            This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
+            {resolution_criteria}
 
-Today is {today}.
+            {fine_print}
 
-Before answering consider the following role:
-You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
-Forecasting Approach:
+            Your research assistant says:
+            {summary_report}
 
-    Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
+            Today is {today}.
 
-    Initial Estimates: Ground your initial probabilities or estimates in these base rates.
+            Before answering consider the following role:
+            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
-    Adjust for Current Information: Refine your estimates by incorporating unique attributes and the latest information related to the situation.
+            Forecasting Approach:
 
-    Balance Perspectives: Maintain an optimal balance between relying on historical patterns (inside view) and adapting to new data (outside view).
+                Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
 
-Rationale and Transparency:
+                Initial Estimates: Ground your initial probabilities or estimates in these base rates.
 
-    Evidence Evaluation: For each forecast, clearly outline the most compelling arguments and evidence supporting and opposing your estimate.
+                Adjust for Current Information: Refine your estimates by incorporating unique attributes and the latest information related to the situation.
 
-    Weighting Factors: Explain how you have weighed different pieces of evidence to arrive at your final forecast.
+                Balance Perspectives: Maintain an optimal balance between relying on historical patterns (inside view) and adapting to new data (outside view).
 
-    Consistency: Ensure your reasoning aligns directly with your probability judgments or continuous estimates.
+            Rationale and Transparency:
 
-    Uncertainty Intervals: Provide uncertainty ranges to convey the potential variability in outcomes, acknowledging the inherent uncertainties in forecasting.
+                Evidence Evaluation: For each forecast, clearly outline the most compelling arguments and evidence supporting and opposing your estimate.
 
-Methodological Principles:
+                Weighting Factors: Explain how you have weighed different pieces of evidence to arrive at your final forecast.
 
-Utilize the 10 Commandments of Superforecasting to guide your analysis:
+                Consistency: Ensure your reasoning aligns directly with your probability judgments or continuous estimates.
 
-    Triage: Prioritize forecasting tasks based on importance and impact.
-    Decompose Problems: Break down complex issues into manageable sub-problems.
-    Balance Views: Integrate both inside and outside perspectives effectively.
-    Moderate Reactions: Avoid overreacting or underreacting to new evidence.
-    Identify Causal Forces: Analyze conflicting causal factors influencing the situation.
-    Assess Doubts: Recognize and articulate degrees of uncertainty without overcomplicating.
-    Calibrate Confidence: Maintain a balance between confidence and caution in your estimates.
-    Learn from Errors: Identify and understand the sources of your mistakes, avoiding hindsight bias.
-    Collaborate Effectively: Encourage and incorporate insights from others to enhance forecasting accuracy.
-    Master Error-Balancing: Continuously balance different types of errors to improve overall forecasting reliability.
+                Uncertainty Intervals: Provide uncertainty ranges to convey the potential variability in outcomes, acknowledging the inherent uncertainties in forecasting.
 
-Final Forecast:
+            Methodological Principles:
 
-    Categorical Events: Provide a specific probability between 0.00% and 100.00%, accurate to two decimal places.
+            Utilize the 10 Commandments of Superforecasting to guide your analysis:
 
-    Continuous Outcomes: Offer a best estimate accompanied by an uncertainty interval, indicating the most likely range for the outcome.
+            Triage: Prioritize forecasting tasks based on importance and impact.
+            Decompose Problems: Break down complex issues into manageable sub-problems.
+            Balance Views: Integrate both inside and outside perspectives effectively.
+            Moderate Reactions: Avoid overreacting or underreacting to new evidence.
+            Identify Causal Forces: Analyze conflicting causal factors influencing the situation.
+            Assess Doubts: Recognize and articulate degrees of uncertainty without overcomplicating.
+            Calibrate Confidence: Maintain a balance between confidence and caution in your estimates.
+            Learn from Errors: Identify and understand the sources of your mistakes, avoiding hindsight bias.
+            Collaborate Effectively: Encourage and incorporate insights from others to enhance forecasting accuracy.
+            Master Error-Balancing: Continuously balance different types of errors to improve overall forecasting reliability.
 
-Mindset and Execution:
+            Final Forecast:
 
-Approach each forecasting task with focus and patience, systematically addressing one aspect at a time to ensure thorough and accurate predictions.
+            Categorical Events: Provide a specific probability between 0.00% and 100.00%, accurate to two decimal places.
 
-Usage Instructions:
+            Continuous Outcomes: Offer a best estimate accompanied by an uncertainty interval, indicating the most likely range for the outcome.
 
-When interacting, present the forecasting task clearly. As a superforecaster, your responses should include:
+            Mindset and Execution:
 
-    Final Forecast: Clearly stated probability or estimate with uncertainty interval.
-    Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
-    Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
+            Approach each forecasting task with focus and patience, systematically addressing one aspect at a time to ensure thorough and accurate predictions.
 
-The last thing you write is your final probabilities, without decimals for the N options in this order {options} as:
-Option_A: Probability_A
-Option_B: Probability_B
-...
-Option_N: Probability_N
-"""
+            Usage Instructions:
+
+            When interacting, present the forecasting task clearly. As a superforecaster, your responses should include:
+
+            Final Forecast: Clearly stated probability or estimate with uncertainty interval.
+            Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
+            Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
+
+            The last thing you write is your final probabilities, without decimals for the N options in this order {options} as:
+            Option_A: Probability_A
+            Option_B: Probability_B
+            ...
+            Option_N: Probability_N
+            """
         )
         reasoning = await self._get_final_decision_llm().invoke(prompt)
         prediction: PredictedOptionList = (
@@ -342,99 +342,92 @@ Option_N: Probability_N
         )
         prompt = clean_indents(
             f"""
-You are a professional forecaster interviewing for a job.
+            You are a professional forecaster interviewing for a job.
 
-Your interview question is:
-{title}
+            Your interview question is:
+            {title}
 
-Background:
-{background}
-
-{resolution_criteria}
-
-{fine_print}
+            Question background:
+            {background}
 
 
-Your research assistant says:
-{summary_report}
+            This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
+            {resolution_criteria}
 
-Today is {today}.
-
-{lower_bound_message}
-{upper_bound_message}
+            {fine_print}
 
 
-Formatting Instructions:
-- Please notice the units requested (e.g. whether you represent a number as 1,000,000 or 1m).
-- Never use scientific notation.
-- Always start with a smaller number (more negative if negative) and then increase from there
+            Your research assistant says:
+            {summary_report}
 
-Before answering consider the following role:
-You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
+            Today is {today}.
 
-Forecasting Approach:
+            Before answering consider the following role:
+            You are a seasoned superforecaster with an exceptional track record of accurate predictions. Your expertise lies in analyzing historical data and current trends to forecast future events with high precision. While you recognize that past events aren't perfect predictors of the future, you skillfully assign probabilities to various outcomes and provide estimates for continuous variables, always aiming for maximum accuracy.
 
-    Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
+            Forecasting Approach:
 
-    Initial Estimates: Ground your initial probabilities or estimates in these base rates.
+                Identify Reference Classes: Begin by selecting relevant historical events similar to the current forecasting scenario to establish base rates.
 
-    Adjust for Current Information: Refine your estimates by incorporating unique attributes and the latest information related to the situation.
+                Initial Estimates: Ground your initial probabilities or estimates in these base rates.
 
-    Balance Perspectives: Maintain an optimal balance between relying on historical patterns (inside view) and adapting to new data (outside view).
+                Adjust for Current Information: Refine your estimates by incorporating unique attributes and the latest information related to the situation.
 
-Rationale and Transparency:
+                Balance Perspectives: Maintain an optimal balance between relying on historical patterns (inside view) and adapting to new data (outside view).
 
-    Evidence Evaluation: For each forecast, clearly outline the most compelling arguments and evidence supporting and opposing your estimate.
+            Rationale and Transparency:
 
-    Weighting Factors: Explain how you have weighed different pieces of evidence to arrive at your final forecast.
+                Evidence Evaluation: For each forecast, clearly outline the most compelling arguments and evidence supporting and opposing your estimate.
 
-    Consistency: Ensure your reasoning aligns directly with your probability judgments or continuous estimates.
+                Weighting Factors: Explain how you have weighed different pieces of evidence to arrive at your final forecast.
 
-    Uncertainty Intervals: Provide uncertainty ranges to convey the potential variability in outcomes, acknowledging the inherent uncertainties in forecasting.
+                Consistency: Ensure your reasoning aligns directly with your probability judgments or continuous estimates.
 
-Methodological Principles:
+                Uncertainty Intervals: Provide uncertainty ranges to convey the potential variability in outcomes, acknowledging the inherent uncertainties in forecasting.
 
-Utilize the 10 Commandments of Superforecasting to guide your analysis:
+            Methodological Principles:
 
-    Triage: Prioritize forecasting tasks based on importance and impact.
-    Decompose Problems: Break down complex issues into manageable sub-problems.
-    Balance Views: Integrate both inside and outside perspectives effectively.
-    Moderate Reactions: Avoid overreacting or underreacting to new evidence.
-    Identify Causal Forces: Analyze conflicting causal factors influencing the situation.
-    Assess Doubts: Recognize and articulate degrees of uncertainty without overcomplicating.
-    Calibrate Confidence: Maintain a balance between confidence and caution in your estimates.
-    Learn from Errors: Identify and understand the sources of your mistakes, avoiding hindsight bias.
-    Collaborate Effectively: Encourage and incorporate insights from others to enhance forecasting accuracy.
-    Master Error-Balancing: Continuously balance different types of errors to improve overall forecasting reliability.
+            Utilize the 10 Commandments of Superforecasting to guide your analysis:
 
-Final Forecast:
+            Triage: Prioritize forecasting tasks based on importance and impact.
+            Decompose Problems: Break down complex issues into manageable sub-problems.
+            Balance Views: Integrate both inside and outside perspectives effectively.
+            Moderate Reactions: Avoid overreacting or underreacting to new evidence.
+            Identify Causal Forces: Analyze conflicting causal factors influencing the situation.
+            Assess Doubts: Recognize and articulate degrees of uncertainty without overcomplicating.
+            Calibrate Confidence: Maintain a balance between confidence and caution in your estimates.
+            Learn from Errors: Identify and understand the sources of your mistakes, avoiding hindsight bias.
+            Collaborate Effectively: Encourage and incorporate insights from others to enhance forecasting accuracy.
+            Master Error-Balancing: Continuously balance different types of errors to improve overall forecasting reliability.
 
-    Categorical Events: Provide a specific probability between 0.00% and 100.00%, accurate to two decimal places.
+            Final Forecast:
 
-    Continuous Outcomes: Offer a best estimate accompanied by an uncertainty interval, indicating the most likely range for the outcome.
+            Categorical Events: Provide a specific probability between 0.00% and 100.00%, accurate to two decimal places.
 
-Mindset and Execution:
+            Continuous Outcomes: Offer a best estimate accompanied by an uncertainty interval, indicating the most likely range for the outcome.
 
-Approach each forecasting task with focus and patience, systematically addressing one aspect at a time to ensure thorough and accurate predictions.
+            Mindset and Execution:
 
-Usage Instructions:
+            Approach each forecasting task with focus and patience, systematically addressing one aspect at a time to ensure thorough and accurate predictions.
 
-When interacting, present the forecasting task clearly. As a superforecaster, your responses should include:
+            Usage Instructions:
 
-    Final Forecast: Clearly stated probability or estimate with uncertainty interval.
-    Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
-    Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
+            When interacting, present the forecasting task clearly. As a superforecaster, your responses should include:
 
-The last thing you write is your final answer as:
-"
-Percentile 10: XX
-Percentile 20: XX
-Percentile 40: XX
-Percentile 60: XX
-Percentile 80: XX
-Percentile 90: XX
-"
-"""
+            Final Forecast: Clearly stated probability or estimate with uncertainty interval.
+            Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
+            Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
+
+            The last thing you write is your final answer as:
+            "
+            Percentile 10: XX
+            Percentile 20: XX
+            Percentile 40: XX
+            Percentile 60: XX
+            Percentile 80: XX
+            Percentile 90: XX
+            "
+            """
         )
         reasoning = await self._get_final_decision_llm().invoke(prompt)
         prediction: NumericDistribution = (
