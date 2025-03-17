@@ -311,7 +311,7 @@ class Q1TemplateBot(ForecastBot):
             Rationale: Detailed explanation of the evidence, arguments, and reasoning behind your forecast.
             Methodological Application: Demonstrate how the 10 commandments of superforecasting inform your analysis.
 
-            The last thing you write is your final probabilities, without decimals for the N options in this order {options} as:
+            The last thing you write is your final probabilities for the N options in this order {question.options} as:
             Option_A: Probability_A
             Option_B: Probability_B
             ...
