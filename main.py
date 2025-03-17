@@ -242,11 +242,12 @@ class Q1TemplateBot(ForecastBot):
             Your interview question is:
             {question.question_text}
 
-            Question background:
+            The options are: {question.options}
+
+
+            Background:
             {question.background_info}
 
-
-            This question's outcome will be determined by the specific criteria below. These criteria have not yet been satisfied:
             {question.resolution_criteria}
 
             {question.fine_print}
